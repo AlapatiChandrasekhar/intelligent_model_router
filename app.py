@@ -21,9 +21,12 @@ st.markdown(f"""
     .stMetric > div > div > div > div {{
         color: {EGNYTE_GREEN};
     }}
-    /* Style for the sidebar navigation */
     [data-testid="stSidebar"] {{
-        background-color: #f8f9fa;
+        background-color: #262730;
+        color: white;
+    }}
+    [data-testid="stSidebar"] * {{
+        color: white !important;
     }}
     </style>
     """, unsafe_allow_html=True)
@@ -116,11 +119,7 @@ def render_home_page():
         user_prompt = st.text_area("What can I help with?", height=150)
         
         # Dynamic Button Visibility Logic
-        if user_prompt.strip() or uploaded_files:
-            process_btn = st.button("Route & Process", type="primary")
-        else:
-            st.info("Please enter a prompt or upload a file to enable routing.")
-            process_btn = False
+        process_btn = st.button("Route & Process", type="primary")
 
         # METRICS AREA
         st.markdown("### Metrics (Current Session)")
@@ -131,24 +130,27 @@ def render_home_page():
 
         # Logic Execution
         if process_btn:
-            with st.spinner("Analyzing complexity and routing to optimal model..."):
-                # Call the backend logic
-                result = logic.get_routing_results(user_prompt, uploaded_files)
-                
-                # Update Persistent State in JSON
-                stats = update_stats(result)
-                current_metrics = stats["last_session"]
-                
-                # Save answer to session state to display in col2
-                st.session_state['last_answer'] = result['answer']
-                
-                # Success Feedback with Currency Conversion
-                cost_inr = result['cost_saved'] * 86.0
-                st.success(f"Successfully routed to {result['model_name']}! You saved ₹{cost_inr:.2f}")
-                
-                # Visual Reward for High Savings
-                if result['cost_saved'] > 0.4:
-                     st.balloons()
+            if not user_prompt and not uploaded_files:
+                st.warning("Please enter a prompt or upload a file to proceed.")
+            else:
+                with st.spinner("Analyzing complexity and routing to optimal model..."):
+                    # Call the backend logic
+                    result = logic.get_routing_results(user_prompt, uploaded_files)
+                    
+                    # Update Persistent State in JSON
+                    stats = update_stats(result)
+                    current_metrics = stats["last_session"]
+                    
+                    # Save answer to session state to display in col2
+                    st.session_state['last_answer'] = result['answer']
+                    
+                    # Success Feedback with Currency Conversion
+                    cost_inr = result['cost_saved'] * 86.0
+                    st.success(f"Successfully routed to {result['model_name']}! You saved ₹{cost_inr:.2f}")
+                    
+                    # Visual Reward for High Savings
+                    if result['cost_saved'] > 0.4:
+                         st.balloons()
 
         # Display Metrics in Container (Adjustable Height based on content)
         with st.container(border=True):

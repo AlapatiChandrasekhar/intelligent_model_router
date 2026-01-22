@@ -1,13 +1,13 @@
 {
-    "total_time_saved": 4.76,
-    "total_cost_saved": 10.9026,
-    "total_carbon_saved": 0.00946,
-    "total_tokens_saved": 1206,
+    "total_time_saved": 45.41,
+    "total_cost_saved": 23.0388,
+    "total_carbon_saved": 0.12358999999999999,
+    "total_tokens_saved": 13604,
     "last_session": {
         "model_name": "Llama 3 70B",
-        "cost_saved": 0.1459,
-        "time_saved": 1.7,
-        "carbon_footprint": 0.00199,
-        "tokens_used": 171
+        "cost_saved": 0.4652,
+        "time_saved": 0.26,
+        "carbon_footprint": 0.00337,
+        "tokens_used": 464
     }
 }

@@ -1,13 +1,11 @@
 {
-    "total_time_saved": 45.41,
-    "total_cost_saved": 23.0388,
-    "total_carbon_saved": 0.12358999999999999,
-    "total_tokens_saved": 13604,
+    "total_time_saved": 370.50000000000125,
+    "total_cost_saved": 0.633399999999999,
+    "total_carbon_saved": 0.21178099999999977,
     "last_session": {
-        "model_name": "Llama 3 70B",
-        "cost_saved": 0.4652,
-        "time_saved": 0.26,
-        "carbon_footprint": 0.00337,
-        "tokens_used": 464
+        "model_name": "claude-haiku-4-5",
+        "cost_saved": 0.0003,
+        "time_saved": 2.3,
+        "carbon_footprint": 0.000119
     }
 }
